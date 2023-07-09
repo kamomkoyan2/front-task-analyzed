@@ -19,10 +19,10 @@ const config = {
   },
   pop: {
     enterFromClass: "opacity-0 scale-95",
-    enterActiveClass: "transform-gpu transition duration-500 ease-in-out",
+    enterActiveClass: "transform-gpu transition duration-400 ease-in-out",
     enterToClass: "opacity-100 scale-100",
     leaveFromClass: "opacity-100 scale-100",
-    leaveActiveClass: "transform-gpu transition duration-500 ease-in-out",
+    leaveActiveClass: "transform-gpu transition duration-400 ease-in-out",
     leaveToClass: "opacity-0 scale-95",
   },
   home: {

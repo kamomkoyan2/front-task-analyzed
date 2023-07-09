@@ -4,18 +4,19 @@ import Button from '@/components/includes/Button.vue'
 import Loading from '@/components/includes/Loading.vue'
 import {useRouter, useRoute} from "vue-router";
 import {useServerRequest} from "@/composables/useServerRequest";
+import Modal from "@/components/includes/Modal.vue";
+import {ref} from "vue";
 
 
 const router = useRouter()
+const route = useRoute()
 const { responseData, loading, makeRequest } = useServerRequest();
 const { isPending, isFetching, isError, data, error } = useQuery({
   queryKey: ['nodes'],
   queryFn:  async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URI}/nodes`)
-    if (!response.ok) {
-      throw new Error('Network response was not ok')
-    }
-    return response.json()
+    const response = await makeRequest(`${import.meta.env.VITE_API_URI}/nodes`)
+
+   return response
   },
 })
 
@@ -31,8 +32,8 @@ const deleteMutation = useMutation({
     });
   },
    onSuccess: () => {
-  queryClient.invalidateQueries('node_key');
-  router.push('/');
+    queryClient.invalidateQueries('node_key');
+    router.push('/');
 },
 });
 
@@ -41,6 +42,19 @@ function deleteNode(id) {
   deleteMutation.mutate(id);
 }
 
+const dataParam = route.query.data;
+let datastring =typeof dataParam === "string" ? dataParam : null
+let modalOpen = ref(true);
+const onClose = () => {
+  router.replace({
+    query: {},
+  });
+  datastring = null
+  responseData.value = null
+  modalOpen.value = false
+};
+
+
 </script>
 
 
@@ -48,6 +62,18 @@ function deleteNode(id) {
 <template>
 <div>
   <span v-if="isPending"><Loading /></span>
+  <Modal
+      v-if="typeof datastring === 'string' "
+      :isOpen="true"
+      :message="datastring"
+      :onClose="onClose"
+  />
+  <Modal
+      v-if="typeof responseData === 'string' "
+      :isOpen="true"
+      :message="responseData"
+      :onClose="onClose"
+  />
   <div v-else-if="isError">
     <div class="w-full h-screen flex flex-col lg:flex-row items-center justify-center space-y-16 lg:space-y-0 space-x-8 2xl:space-x-0">
     <div class="w-full lg:w-1/2 flex flex-col items-center justify-center lg:px-2 xl:px-0 text-center">

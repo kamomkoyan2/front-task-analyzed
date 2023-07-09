@@ -11,7 +11,7 @@ import Header from "@/components/structure/Header.vue";
 
     <RouterView v-slot="{ Component }">
       <template v-if="Component">
-        <AppearTransition transition="opacity">
+        <AppearTransition transition="pop">
           <component class="h-screen" :is="Component" />
         </AppearTransition>
       </template>

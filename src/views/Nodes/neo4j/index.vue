@@ -8,6 +8,7 @@ import Select from '@/components/includes/Select.vue'
 
 import Neovis from 'neovis.js';
 import {useServerRequest} from "@/composables/useServerRequest";
+import Modal from "@/components/includes/Modal.vue";
 
 const processedData = ref(null)
 
@@ -41,7 +42,6 @@ async function connectNode() {
     },
     body: JSON.stringify(form.value),
   });
-
   drawGraph()
 }
 
@@ -107,6 +107,13 @@ function drawGraph() {
   vis.render();
 }
 
+let modalOpen = ref(true);
+
+const onClose = () => {
+  responseData.value = null
+  modalOpen.value = false
+};
+
 
 onMounted(() => {
   drawGraph()
@@ -119,6 +126,12 @@ onMounted(() => {
 <div>
   <span v-if="isPending"><Loading /></span>
   <span v-else-if="isError">Error: {{ error.message }}</span>
+  <Modal
+      v-if="typeof responseData?.message === 'string' "
+      :isOpen="true"
+      :message="responseData.message"
+      :onClose="onClose"
+  />
   <div>
     <div class="border drop-shadow-2xl" id="visualization"></div>
   </div>

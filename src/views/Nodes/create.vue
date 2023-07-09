@@ -30,14 +30,14 @@ const mutation = useMutation({
 })
 
 async function postNode() {
-  await makeRequest(`${import.meta.env.VITE_API_URI}/nodes`, {
+  const  response =   await makeRequest(`${import.meta.env.VITE_API_URI}/nodes`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(form),
   });
-  await router.push('/')
+  await router.push({path: '/', query: { data: response.message } })
 }
 
 
