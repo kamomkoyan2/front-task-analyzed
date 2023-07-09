@@ -25,7 +25,7 @@ const styles = {
       :is="as"
       class="relative rounded-lg bg-primary-500 shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm"
       :class="[
-      disabled && 'opacity-75',
+      disabled && 'opacity-75 cursor-not-allowed',
       styles[color],
       'block  p-4 font-bold shadow-sm rounded-full',
     ]"
