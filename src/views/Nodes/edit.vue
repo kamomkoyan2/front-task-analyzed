@@ -105,7 +105,7 @@ async function updateNode() {
               <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
               <Input
                   id="name"
-                  type="text"
+                  type="email"
                   v-model="form.properties.email"
                   placeholder="e-mail"
                   required

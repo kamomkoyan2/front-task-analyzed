@@ -73,7 +73,7 @@ async function postNode() {
             <div class="w-full">
               <Input
                   id="name"
-                  type="text"
+                  type="email"
                   label="E-MAIL"
                   v-model="form.properties.email"
                   required
