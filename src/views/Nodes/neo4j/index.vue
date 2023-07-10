@@ -155,7 +155,7 @@ onMounted(() => {
           id="relationshipType"
           type="text"
           v-model="form.relationshipType"
-          placeholder="Relation Type mention ex(Friend)"
+          placeholder="Relation Type ex*(Friend)"
           required
 
       />
