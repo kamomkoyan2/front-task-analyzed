@@ -9,6 +9,7 @@ import Select from '@/components/includes/Select.vue'
 import Neovis from 'neovis.js';
 import {useServerRequest} from "@/composables/useServerRequest";
 import Modal from "@/components/includes/Modal.vue";
+import Input from "@/components/includes/Input.vue";
 
 const processedData = ref(null)
 
@@ -16,7 +17,8 @@ const { responseData, loading, makeRequest } = useServerRequest();
 
 const form = ref({
   sourceNodeId: '',
-  targetNodeId: ''
+  targetNodeId: '',
+  relationshipType: ''
 })
 
 const { isPending, isFetching, isError, data, error } = useQuery({
@@ -148,6 +150,15 @@ onMounted(() => {
         v-model="form.sourceNodeId"
         required
     />
+
+      <Input
+          id="relationshipType"
+          type="text"
+          v-model="form.relationshipType"
+          placeholder="Relation Type mention ex(Friend)"
+          required
+
+      />
 
     <Select
         id="gender"
